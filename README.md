@@ -3,3 +3,5 @@
 
 ## App très légère développée avec Alpine.js et Tailwind.css. 
 ##### TOUT le JavaScript assurant la réactivité et TOUT le CSS est INLINE.
+
+Essayer l'app :point_right: https://alpinetailwind-todo.netlify.app/
