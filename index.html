@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>Alpine.js + Tailwind.css tâches app</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"
+      defer
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tailwindcss/ui@latest/dist/tailwind-ui.min.css"
+    />
+    <meta charset="utf-8" />
+  </head>
+
+  <body class="bg-gray-300 text-gray-800">
+    <div
+      class="container mt-16 mx-auto lg:w-2/5 md:w-1/2 sm:w-7/8 bg-white shadow-lg rounded-lg"
+    >
+      <div class="p-6">
+        <h1 class="text-2xl">Alpine X Tailwind Tâches</h1>
+
+        <div class="border-t border-gray-100 my-2"></div>
+
+        <div x-data="state">
+          <div class="mb-4">
+            <div class="hidden sm:block">
+              <div class="border-b border-gray-200">
+                <nav class="-mb-px flex">
+                  <a
+                    href="#"
+                    :class=" show_todo ? 'w-1/2 py-4 px-1 text-center border-b-2 border-indigo-500 font-medium text-sm leading-5 text-indigo-600 focus:outline-none focus:text-indigo-800 focus:border-indigo-700' : 'w-1/2 py-4 px-1 text-center border-b-2 border-transparent font-medium text-sm leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300'"
+                    @click.prevent="show_todo = true"
+                  >
+                    À compléter
+                  </a>
+                  <a
+                    href="#"
+                    :class=" !show_todo ? 'w-1/2 py-4 px-1 text-center border-b-2 border-indigo-500 font-medium text-sm leading-5 text-indigo-600 focus:outline-none focus:text-indigo-800 focus:border-indigo-700' : 'w-1/2 py-4 px-1 text-center border-b-2 border-transparent font-medium text-sm leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300'"
+                    @click.prevent="show_todo = false"
+                  >
+                    Terminées
+                  </a>
+                </nav>
+              </div>
+            </div>
+          </div>
+
+          <template x-for="todo in todos" :key="todo.id">
+            <div
+              x-show="todo.todo === show_todo"
+              class="transform transition origin-top"
+            >
+              <div class="flex items-center">
+                <input
+                  :id=" todo.id"
+                  type="checkbox"
+                  class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                  :checked="!todo.todo"
+                  @click="setTimeout(function() {todo.todo = !todo.todo}, 1000)"
+                />
+                <label
+                  :for="todo.id"
+                  class="ml-2 block text-md leading-6 text-gray-900"
+                >
+                  <span x-text="todo.text"></span>
+                </label>
+              </div>
+            </div>
+          </template>
+
+          <div x-show="show_todo" class="mt-4">
+            <label
+              for="add_todo"
+              class="ml-2 block text-sm leading-5 text-gray-900"
+              >Ajouter une tâche</label
+            >
+            <input
+              type="text"
+              id="add_todo"
+              class="form-input"
+              @keyup.enter="todos.push({id: (+ new Date()), text: $event.target.value, todo: true});"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      let state = {
+        todos: [
+          { id: 1, text: "Appeller ma grand-mère", todo: true },
+          { id: 2, text: "Acheter des cornichons", todo: true },
+          { id: 3, text: "Nettoyer le four", todo: true }
+        ],
+        show_todo: true
+      };
+    </script>
+  </body>
+</html>
