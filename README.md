@@ -8,6 +8,6 @@
 
 :white_square_button: Acheter des cornichons 
 
-:white_square_button: Acheter des cornichons
+:white_square_button: Nettoyer le four
 
 Essayer l'app :point_right: https://alpinetailwind-todo.netlify.app/
